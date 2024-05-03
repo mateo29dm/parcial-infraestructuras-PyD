@@ -1,0 +1,9 @@
+# Excluye los archivos .mp3
+*.mp3
+
+# pycache
+__pycache__/
+*.pyc
+
+# Registro
+registro.csv
