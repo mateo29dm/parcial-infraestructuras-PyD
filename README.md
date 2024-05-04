@@ -55,5 +55,5 @@ Un ejemplo del comando de ejecucion:
 
 **Logica de ejecucion de paralelismo del aplicativo**
 
-![Grafico de logica de procesos de paralelismo](./app%20logic%20graph/Parallel%20programming%20logic%20graph.png)
+![Grafico de logica de procesos de paralelismo](./app%20logic%20graph/Parallel_programming_logic_graph.png)
 
