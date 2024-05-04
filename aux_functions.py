@@ -9,7 +9,11 @@ def registrar_descarga(url, nombre):
     canal = obtener_nombre_canal(url)
     with open("registro.csv", "a", newline="") as file:
         writer = csv.writer(file)
-        writer.writerow([canal, nombre, url, fecha_publicacion, fecha_descarga])
+        writer.writerow([f"Nombre del canal: {canal}", 
+                        f" Nombre del video:{nombre}", 
+                        f" URL: {url}", 
+                        f" Fecha de publicacion: {fecha_publicacion}",
+                        f" Fecha de descarga: {fecha_descarga}"])
 
 
 def obtener_fecha_publicacion(url):

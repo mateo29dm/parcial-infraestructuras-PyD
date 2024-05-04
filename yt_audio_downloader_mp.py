@@ -1,17 +1,12 @@
 import subprocess
 import os
-import threading
+import multiprocessing
+import time
 from aux_functions import *
 
-# Obtener la ruta del directorio actual del script
-ruta_script = os.path.dirname(os.path.abspath(__file__))
+def descargar_video_y_extraer_audio(ih, num_nucleos, urls):
 
-# Cambiar al directorio del script
-os.chdir(ruta_script)
-
-def descargar_video_y_extraer_audio(ih, num_url, num_hilos, urls):
-
-    for i in range(ih, num_url, num_hilos):
+    for i in range(ih, len(urls), num_nucleos):
         nombre = obtener_nombre_video(urls[i])
         # Descargar el video
         subprocess.run(["yt-dlp", "-o", f"{nombre}", urls[i]])
@@ -22,20 +17,27 @@ def descargar_video_y_extraer_audio(ih, num_url, num_hilos, urls):
         # Crear el archivo .csv con el registro
         registrar_descarga(urls[i], nombre)
 
+        while not os.path.exists(f"./audiosMP/{nombre}.mp3"):
+            time.sleep(0.000000001)
 
-def main(num_hilos):
+        os.remove(f"{nombre}.webm")
+            
+
+
+def main(num_nucleos):
     # Lista de URLs de los videos a descargar
-    urls = ["https://www.youtube.com/watch?v=4Fy6neJmX9s", "https://www.youtube.com/watch?v=XNwzxjB05fE", "https://www.youtube.com/watch?v=SQkFh8XOIcE", "https://www.youtube.com/watch?v=koX7Bua4WZs", "https://www.youtube.com/watch?v=5Ulf9ifvQPQ"]
+    urls = ["https://www.youtube.com/watch?v=4Fy6neJmX9s", "https://www.youtube.com/watch?v=XNwzxjB05fE",
+            "https://www.youtube.com/watch?v=SQkFh8XOIcE", "https://www.youtube.com/watch?v=koX7Bua4WZs",
+            "https://www.youtube.com/watch?v=5Ulf9ifvQPQ"]
 
-    num_urls = len(urls)
-    threads = []
+    processors = []
 
-    for i in range(num_hilos):
-        thread = threading.Thread(target=descargar_video_y_extraer_audio, args=(i, num_urls, num_hilos, urls))
-        thread.start()
-        threads.append(thread)
+    for i in range(num_nucleos):
+        nucleo = multiprocessing.Process(target=descargar_video_y_extraer_audio, args=(i, num_nucleos, urls))
+        nucleo.start()
+        processors.append(nucleo)
     
-    for thread in threads:
-        thread.join()
+    for nucleo in processors:
+        nucleo.join()
 
     print("Descarga completada!")
