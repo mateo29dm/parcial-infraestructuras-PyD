@@ -13,12 +13,10 @@ def descargar_video_y_extraer_audio(url, nombre):
     # Extraer el audio
     subprocess.run(["ffmpeg", "-i", f"{nombre}.webm", "-vn", "-codec:a", "libmp3lame", "-q:a", "0", f"./audiosSQ/{nombre}.mp3"])
 
+    
 
-def main():
-    # Lista de URLs de los videos a descargar
-    urls = ["https://www.youtube.com/watch?v=4Fy6neJmX9s", "https://www.youtube.com/watch?v=XNwzxjB05fE",
-            "https://www.youtube.com/watch?v=SQkFh8XOIcE", "https://www.youtube.com/watch?v=koX7Bua4WZs",
-            "https://www.youtube.com/watch?v=5Ulf9ifvQPQ"]
+
+def main(urls):
 
     for url in urls:
         # Extraccion del nombre del video
