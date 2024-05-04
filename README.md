@@ -49,4 +49,11 @@ Un ejemplo del comando de ejecucion:
 
 # **Grafico de la logica del aplicativo**
 
-![Grafico](./app%20logic%20graph/Diagrama%20logica%20del%20aplicativo.png)
+**Logica general del aplicativo**
+
+![Grafico de logica general](./app%20logic%20graph/Diagrama%20logica%20del%20aplicativo.png)
+
+**Logica de ejecucion de paralelismo del aplicativo**
+
+![Grafico de logica de procesos de paralelismo](./app%20logic%20graph/Parallel%20programming%20logic%20graph.png)
+
