@@ -1,8 +1,12 @@
 {
-    "channels":[
+    "canales":[
         {
             "name": "canal1",
             "url": "https://www.youtube.com/channel/UCD0zeUaH44tdlN8EXuSY_BA"
+        },
+        {
+            "name": "canal2",
+            "url": "https://www.youtube.com/@Proximity/videos"
         }
     ]
 }

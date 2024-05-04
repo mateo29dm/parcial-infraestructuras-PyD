@@ -46,3 +46,29 @@ def obtener_nombre_canal(url):
     nombre_canal = info_video.get("channel")
 
     return nombre_canal
+
+def obtener_ultimos_videos(canales_json):
+    # Lee el archivo JSON 
+    with open(canales_json, 'r') as f:
+        data = json.load(f)
+
+    # Obtiene las URLs de los canales
+    canales = [canal['url'] for canal in data['canales']]
+
+    resultados = []  # Lista para guardar las URLs de los videos
+
+    # Para cada canal, obtiene las últimas cinco URLs
+    for canal in canales:
+        # Usa subprocess para ejecutar yt-dlp y obtener los IDs de los últimos 5 videos
+        yt_dlp_cmd = f'yt-dlp --flat-playlist --get-id "{canal}" | head -n 5'
+        result = subprocess.check_output(yt_dlp_cmd, shell=True)
+        
+        # Divide la salida en líneas
+        ultimos_videos = result.decode('utf-8').split()
+
+        # Convierte los IDs a URLs completas 
+        for video_id in ultimos_videos:
+            url = f"https://www.youtube.com/watch?v={video_id}"
+            resultados.append(url)
+
+    return resultados 
