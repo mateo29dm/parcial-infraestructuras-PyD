@@ -20,6 +20,9 @@ def main():
     parser.add_argument("--workers", type=int, default=4, help="Número de workers a utilizar (por defecto: 4, solo para multithreading y multiprocessing)")
     args = parser.parse_args()
 
+    for url in Urls:
+        print(url)
+
     if args.modo == "mt":
         multithreading_main(urls, args.workers)
     elif args.modo == "sq":
