@@ -24,11 +24,7 @@ def descargar_video_y_extraer_audio(ih, num_nucleos, urls):
             
 
 
-def main(num_nucleos):
-    # Lista de URLs de los videos a descargar
-    urls = ["https://www.youtube.com/watch?v=4Fy6neJmX9s", "https://www.youtube.com/watch?v=XNwzxjB05fE",
-            "https://www.youtube.com/watch?v=SQkFh8XOIcE", "https://www.youtube.com/watch?v=koX7Bua4WZs",
-            "https://www.youtube.com/watch?v=5Ulf9ifvQPQ"]
+def main(urls, num_nucleos):
 
     processors = []
 

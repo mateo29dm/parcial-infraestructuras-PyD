@@ -10,7 +10,7 @@ def registrar_descarga(url, nombre):
     with open("registro.csv", "a", newline="") as file:
         writer = csv.writer(file)
         writer.writerow([f"Nombre del canal: {canal}", 
-                        f" Nombre del video:{nombre}", 
+                        f" Nombre del video: {nombre}", 
                         f" URL: {url}", 
                         f" Fecha de publicacion: {fecha_publicacion}",
                         f" Fecha de descarga: {fecha_descarga}"])
@@ -35,6 +35,8 @@ def obtener_nombre_video(url):
     # Obtener el título del video del JSON
     titulo_video = info_video.get("title")
 
+    titulo_video = titulo_video.replace("/", "-")
+
     return titulo_video
 
 def obtener_nombre_canal(url):
@@ -57,16 +59,24 @@ def obtener_ultimos_videos(canales_json):
 
     resultados = []  # Lista para guardar las URLs de los videos
 
-    # Para cada canal, obtiene las últimas cinco URLs
     for canal in canales:
-        # Usa subprocess para ejecutar yt-dlp y obtener los IDs de los últimos 5 videos
-        yt_dlp_cmd = f'yt-dlp --flat-playlist --get-id "{canal}" | head -n 5'
-        result = subprocess.check_output(yt_dlp_cmd, shell=True)
-        
-        # Divide la salida en líneas
-        ultimos_videos = result.decode('utf-8').split()
+        # Usa obtener los IDs de los últimos 5 videos
+        yt_dlp_cmd = ["yt-dlp", "--flat-playlist", "--get-id", canal]
+        head_cmd = ["head", "-n", "5"]
 
-        # Convierte los IDs a URLs completas 
+        # Ejecutar yt-dlp para head
+        yt_dlp_result = subprocess.run(yt_dlp_cmd, capture_output=True, check=True)
+        head_result = subprocess.run(
+            head_cmd,
+            input=yt_dlp_result.stdout,
+            capture_output=True,
+            check=True
+        )
+
+        # Procesar la salida y obtener las últimas 5 URLs
+        ultimos_videos = head_result.stdout.decode("utf-8").split()
+
+        # Convierte los IDs a URLs completas
         for video_id in ultimos_videos:
             url = f"https://www.youtube.com/watch?v={video_id}"
             resultados.append(url)

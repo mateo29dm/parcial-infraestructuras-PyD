@@ -1,12 +1,24 @@
 {
     "canales":[
         {
-            "name": "canal1",
+            "name": "Jinn - Topic",
             "url": "https://www.youtube.com/channel/UCD0zeUaH44tdlN8EXuSY_BA"
         },
         {
-            "name": "canal2",
+            "name": "Proximity",
             "url": "https://www.youtube.com/@Proximity/videos"
+        },
+        {
+            "name": "Foo Fighters",
+            "url": "https://www.youtube.com/watch?v=SBjQ9tuuTJQ&list=PLyjqnQsvvnpLDEXLf58J39uJTfTXjmVzx"
+        },
+        {
+            "name": "STMPD RCRDS",
+            "url": "https://www.youtube.com/@STMPDRCRDS/videos"
+        },
+        {
+            "name": "WaveMusic",
+            "url": "https://www.youtube.com/@wavemusic/videos"
         }
     ]
 }
