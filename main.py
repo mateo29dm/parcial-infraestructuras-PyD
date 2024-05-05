@@ -1,6 +1,5 @@
 import argparse
-import json
-import subprocess
+import timeit
 from yt_audio_downloader_mt import main as multithreading_main
 from yt_audio_downloader_sq import main as sequential_main
 from yt_audio_downloader_mp import main as multiprocessing_main
@@ -11,6 +10,7 @@ urls = []
 
 def main():
 
+    start = timeit.default_timer()
     canales = "canales.json"
 
     urls = obtener_ultimos_videos(canales)
@@ -20,15 +20,16 @@ def main():
     parser.add_argument("--workers", type=int, default=4, help="Número de workers a utilizar (por defecto: 4, solo para multithreading y multiprocessing)")
     args = parser.parse_args()
 
-    for url in Urls:
-        print(url)
+    end = timeit.default_timer()
+
+    tiempo_inicializacion = end - start
 
     if args.modo == "mt":
-        multithreading_main(urls, args.workers)
+        multithreading_main(urls, args.workers, tiempo_inicializacion)
     elif args.modo == "sq":
-        sequential_main(urls)
+        sequential_main(urls, tiempo_inicializacion)
     elif args.modo == "mp":
-        multiprocessing_main(urls, args.workers)
+        multiprocessing_main(urls, args.workers, tiempo_inicializacion)
 
 if __name__ == "__main__":
     main()

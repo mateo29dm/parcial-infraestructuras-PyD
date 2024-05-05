@@ -2,6 +2,7 @@ import subprocess
 import os
 import multiprocessing
 import time
+import timeit
 from aux_functions import *
 
 def descargar_video_y_extraer_audio(ih, num_nucleos, urls):
@@ -24,7 +25,9 @@ def descargar_video_y_extraer_audio(ih, num_nucleos, urls):
             
 
 
-def main(urls, num_nucleos):
+def main(urls, num_nucleos, tiempo_inicializacion):
+
+    start = timeit.default_timer()
 
     processors = []
 
@@ -36,4 +39,11 @@ def main(urls, num_nucleos):
     for nucleo in processors:
         nucleo.join()
 
+    end = timeit.default_timer()
+
+    tiempo_procesamiento = end - start
+
     print("Descarga completada!")
+    print (f"Tiempo en inicializacion = {tiempo_inicializacion}")
+    print(f"Tiempo en procesamiento = {tiempo_procesamiento}")
+    print(f"Tiempo total {tiempo_inicializacion + tiempo_procesamiento}")

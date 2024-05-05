@@ -2,6 +2,7 @@ import subprocess
 import os
 import threading
 import time
+import timeit
 from aux_functions import *
 
 def descargar_video_y_extraer_audio(ih, num_hilos, urls):
@@ -24,8 +25,9 @@ def descargar_video_y_extraer_audio(ih, num_hilos, urls):
             
 
 
-def main(urls, num_hilos):
+def main(urls, num_hilos, tiempo_inicializacion):
     
+    start = timeit.default_timer()
     threads = []
 
     for i in range(num_hilos):
@@ -36,4 +38,11 @@ def main(urls, num_hilos):
     for thread in threads:
         thread.join()
 
+    end = timeit.default_timer()
+
+    tiempo_procesamiento = end - start
+
     print("Descarga completada!")
+    print (f"Tiempo en inicializacion = {tiempo_inicializacion}")
+    print(f"Tiempo en procesamiento = {tiempo_procesamiento}")
+    print(f"Tiempo total {tiempo_inicializacion + tiempo_procesamiento}")

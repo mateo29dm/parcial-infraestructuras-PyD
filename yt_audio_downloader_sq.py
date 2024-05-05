@@ -1,6 +1,7 @@
 import subprocess
 import subprocess
 import os
+import timeit
 from aux_functions import *
 
 def descargar_video_y_extraer_audio(url, nombre):
@@ -16,7 +17,9 @@ def descargar_video_y_extraer_audio(url, nombre):
     
 
 
-def main(urls):
+def main(urls, tiempo_inicializacion):
+
+    start = timeit.default_timer()
 
     for url in urls:
         # Extraccion del nombre del video
@@ -27,3 +30,12 @@ def main(urls):
         registrar_descarga(url, nombre)
         # Eliminar el video
         os.remove(f"{nombre}.webm")
+
+    end = timeit.default_timer()
+    
+    tiempo_procesamiento = end - start
+
+    print("Descarga completada!")
+    print (f"Tiempo en inicializacion = {tiempo_inicializacion}")
+    print(f"Tiempo en procesamiento = {tiempo_procesamiento}")
+    print(f"Tiempo total {tiempo_inicializacion + tiempo_procesamiento}")
