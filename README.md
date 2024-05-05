@@ -33,7 +33,7 @@ El comando recibe 2 argumentos que de no ser incluidos ejecutaran su valor por d
 
 Un ejemplo del comando de ejecucion:
 
-``` python3 main.py --modo mp --hilos 16```
+``` python3 main.py --modo mp --workers 16``` Este comando ejecuta el aplicativo en modo multiprocessing con 16 nucleos de procesamiento
 
 # Descripcion de la logica del aplicativo:
 

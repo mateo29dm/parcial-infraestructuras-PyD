@@ -82,4 +82,3 @@ def obtener_ultimos_videos(canales_json):
             resultados.append(url)
 
     return resultados 
-
